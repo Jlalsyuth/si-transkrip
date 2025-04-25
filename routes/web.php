@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormHapusMatkulController; 
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -14,6 +15,13 @@ Route::get('dashboard', function () {
 Route::get('hapus-matkul', function () {
     return Inertia::render('HapusMatkul');
 });
+
+Route::get('/form-hapus-matkul', function () {
+    return Inertia::render('FormHapusMatkul');
+});
+
+Route::post('/hapus', [FormHapusMatkulController::class, 'store'])
+    ->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
