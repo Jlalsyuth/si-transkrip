@@ -1,0 +1,204 @@
+@import 'tailwindcss';
+@import "tw-animate-css";
+
+/* Digunakan oleh Tailwind JIT untuk memindai kelas */
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+/* Varian kustom untuk dark mode jika diperlukan */
+@custom-variant dark (&:is(.dark *));
+
+/* Variabel tema yang digunakan oleh komponen UI Anda (misalnya dari ShadCN) */
+@theme inline {
+  --font-sans:
+    Instrument Sans, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input); /* Biasanya untuk border input */
+  --color-ring: var(--ring);   /* Untuk focus ring */
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar-background); /* Alias untuk sidebar-background */
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer utilities {
+  body,
+  html {
+    /* Font utama sudah didefinisikan di @theme inline, bisa juga di sini atau di tailwind.config.js */
+    /* --font-sans:
+      'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+      'Noto Color Emoji'; */
+  }
+}
+
+/* Variabel Warna untuk Mode Terang (Light Mode) */
+:root {
+  /* Latar Belakang & Teks Utama (sesuai dashboard) */
+  --background: hsl(0 0% 98%);            /* Abu-abu sangat muda untuk latar utama halaman */
+  --foreground: hsl(240 10% 3.9%);       /* Hitam kebiruan untuk teks utama */
+
+  /* Komponen Kartu (Card) */
+  --card: hsl(0 0% 100%);                 /* Putih untuk latar kartu */
+  --card-foreground: hsl(240 10% 3.9%);   /* Teks di dalam kartu */
+
+  /* Komponen Popover */
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(240 10% 3.9%);
+
+  /* Warna Primer (Tombol Aksi Utama - Oranye) */
+  --primary: hsl(25 90% 55%);             /* Oranye terang */
+  --primary-foreground: hsl(0 0% 98%);    /* Putih untuk teks di tombol primer */
+
+  /* Warna Sekunder */
+  --secondary: hsl(240 4.8% 95.9%);       /* Abu-abu muda */
+  --secondary-foreground: hsl(240 5.9% 10%);/* Teks gelap untuk tombol sekunder */
+
+  /* Warna Muted */
+  --muted: hsl(240 4.8% 95.9%);
+  --muted-foreground: hsl(240 3.8% 46.1%);/* Abu-abu untuk teks muted */
+
+  /* Warna Aksen */
+  --accent: hsl(25 90% 92%);              /* Oranye sangat muda/pastel untuk aksen */
+  --accent-foreground: hsl(25 90% 40%);   /* Teks oranye tua untuk aksen */
+
+  /* Warna Destructive */
+  --destructive: hsl(0 84.2% 60.2%);      /* Merah */
+  --destructive-foreground: hsl(0 0% 98%);/* Putih */
+
+  /* Garis (Border), Input, dan Ring Fokus */
+  --border: hsl(240 5.9% 90%);            /* Border abu-abu muda */
+  --input: hsl(240 5.9% 90%);             /* Border untuk input (serupa dengan --border) */
+  --ring: hsl(25 90% 55%);                /* Ring fokus warna oranye */
+
+  /* Chart Colors (Biarkan default jika belum ada kebutuhan spesifik) */
+  --chart-1: hsl(12 76% 61%);
+  --chart-2: hsl(173 58% 39%);
+  --chart-3: hsl(197 37% 24%);
+  --chart-4: hsl(43 74% 66%);
+  --chart-5: hsl(27 87% 67%);
+
+  /* Radius Sudut */
+  --radius: 0.5rem;
+
+  /* Variabel Khusus Sidebar */
+  --sidebar-background: hsl(220 16% 94%);     /* Latar sidebar (abu-abu muda sejuk, sedikit beda dari main bg) */
+  --sidebar-foreground: hsl(240 5% 30%);       /* Teks di sidebar (abu-abu tua) */
+  --sidebar-primary: var(--primary);           /* Oranye (menggunakan warna primer utama) */
+  --sidebar-primary-foreground: var(--primary-foreground); /* Putih */
+  --sidebar-accent: hsl(25 100% 96%);          /* Latar item aktif (oranye sangat muda) */
+  --sidebar-accent-foreground: var(--primary); /* Teks/ikon item aktif (oranye) */
+  --sidebar-border: hsl(220 10% 88%);          /* Border di dalam sidebar */
+  --sidebar-ring: var(--ring);                 /* Ring fokus di sidebar (oranye) */
+}
+
+/* Variabel Warna untuk Mode Gelap (Dark Mode) */
+.dark {
+  /* Latar Belakang & Teks Utama */
+  --background: hsl(240 6% 10%);          /* Biru keabu-abuan sangat gelap untuk latar utama */
+  --foreground: hsl(0 0% 90%);            /* Abu-abu sangat terang/putih pudar untuk teks utama */
+
+  /* Komponen Kartu (Card) */
+  --card: hsl(240 6% 12%);                /* Sedikit lebih terang dari background utama untuk kartu */
+  --card-foreground: hsl(0 0% 90%);       /* Teks di dalam kartu */
+
+  /* Komponen Popover */
+  --popover: hsl(240 6% 8%);              /* Sangat gelap untuk popover */
+  --popover-foreground: hsl(0 0% 90%);
+
+  /* Warna Primer (Tombol Aksi Utama - Oranye) */
+  --primary: hsl(25 90% 60%);             /* Oranye sedikit lebih cerah/disesuaikan untuk dark mode */
+  --primary-foreground: hsl(0 0% 98%);    /* Putih untuk teks di tombol primer */
+
+  /* Warna Sekunder */
+  --secondary: hsl(240 4% 18%);           /* Abu-abu gelap untuk elemen sekunder */
+  --secondary-foreground: hsl(0 0% 90%);  /* Teks terang untuk tombol sekunder */
+
+  /* Warna Muted */
+  --muted: hsl(240 4% 18%);
+  --muted-foreground: hsl(0 0% 55%);      /* Abu-abu terang untuk teks muted */
+
+  /* Warna Aksen */
+  --accent: hsl(25 80% 25%);              /* Oranye tua/gelap untuk aksen di dark mode */
+  --accent-foreground: hsl(25 90% 70%);   /* Teks oranye lebih terang untuk aksen */
+
+  /* Warna Destructive */
+  --destructive: hsl(0 70% 55%);          /* Merah sedikit disesuaikan untuk dark mode */
+  --destructive-foreground: hsl(0 0% 98%);/* Putih */
+
+  /* Garis (Border), Input, dan Ring Fokus */
+  --border: hsl(240 4% 25%);              /* Border abu-abu gelap */
+  --input: hsl(240 4% 25%);               /* Border untuk input */
+  --ring: hsl(25 90% 60%);                /* Ring fokus warna oranye (disesuaikan) */
+
+  /* Chart Colors (Sesuaikan jika perlu untuk dark mode) */
+  --chart-1: hsl(220 70% 50%);
+  --chart-2: hsl(160 60% 45%);
+  --chart-3: hsl(30 80% 55%);
+  --chart-4: hsl(280 65% 60%);
+  --chart-5: hsl(340 75% 55%);
+
+  /* Variabel Khusus Sidebar */
+  --sidebar-background: hsl(240 6% 8%);       /* Latar sidebar (lebih gelap dari background utama sedikit) */
+  --sidebar-foreground: hsl(0 0% 85%);         /* Teks di sidebar (abu-abu terang) */
+  --sidebar-primary: var(--primary);             /* Oranye (menggunakan warna primer utama dark mode) */
+  --sidebar-primary-foreground: var(--primary-foreground); /* Putih */
+  --sidebar-accent: hsl(25 80% 18%);            /* Latar item aktif (oranye sangat gelap/redup) */
+  --sidebar-accent-foreground: var(--primary);   /* Teks/ikon item aktif (oranye dark mode) */
+  --sidebar-border: hsl(240 4% 18%);            /* Border di dalam sidebar */
+  --sidebar-ring: var(--ring);                   /* Ring fokus di sidebar (oranye dark mode) */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50; /* outline-ring/50 dari kode Anda */
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Pertimbangkan untuk menambahkan font smoothing untuk tampilan teks yang lebih baik */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
